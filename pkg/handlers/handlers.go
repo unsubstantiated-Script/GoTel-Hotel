@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"WebGo/pkg/config"
-	"WebGo/pkg/models"
-	"WebGo/pkg/render"
+	"GoTel/pkg/config"
+	"GoTel/pkg/models"
+	"GoTel/pkg/render"
 	"net/http"
 )
 

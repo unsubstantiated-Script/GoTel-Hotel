@@ -1,9 +1,9 @@
 package main
 
 import (
-	"WebGo/pkg/config"
-	"WebGo/pkg/handlers"
-	"WebGo/pkg/render"
+	"GoTel/pkg/config"
+	"GoTel/pkg/handlers"
+	"GoTel/pkg/render"
 	"fmt"
 	"github.com/alexedwards/scs/v2"
 	"log"

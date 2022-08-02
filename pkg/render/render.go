@@ -1,8 +1,8 @@
 package render
 
 import (
-	"WebGo/pkg/config"
-	"WebGo/pkg/models"
+	"GoTel/pkg/config"
+	"GoTel/pkg/models"
 	"bytes"
 	"html/template"
 	"log"
@@ -103,7 +103,7 @@ func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData)
 	buf := new(bytes.Buffer)
 
 	td = AddDefaultData(td)
-	
+
 	_ = t.Execute(buf, td)
 
 	// render the template
