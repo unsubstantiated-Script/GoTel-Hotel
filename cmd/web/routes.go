@@ -1,8 +1,8 @@
 package main
 
 import (
-	"WebGo/pkg/config"
-	"WebGo/pkg/handlers"
+	"GoTel/pkg/config"
+	"GoTel/pkg/handlers"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"net/http"
