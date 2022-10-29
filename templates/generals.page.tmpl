@@ -1,0 +1,54 @@
+{{template "base" .}}
+{{define "content"}}
+    <div id="main-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#main-carousel" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#main-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#main-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/static/images/woman-laptop.png" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Coffee is Good</h5>
+                    <p>Drink coffee in the morning to wake up. Blow on it to cool it down</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/static/images/tray.png" class="d-block w-100" alt="...">\
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Tray</h5>
+                    <p>Do extra work to put food on a tray so you can be lazy and eat that food in your bed.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/static/images/outside.png" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Outdoor Mountains</h5>
+                    <p>Because indoor mountains are difficult.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="text-center mt-4">Welcome to Fort Smythe Bed and Breakfast</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium asperiores atque blanditiis
+                    debitis deserunt dolores enim facere harum, ipsam laudantium modi nam nesciunt nulla numquam quam
+                    quas quidem sequi sunt tenetur totam ut velit veritatis voluptatibus? Ab aperiam atque dignissimos
+                    expedita, ipsam nam quae quod quos tempore? Atque cum, facere iusto mollitia non quos veritatis?
+                    Accusamus accusantium adipisci aliquid aperiam architecto corporis deserunt dicta dignissimos
+                    doloremque ea eligendi eos ex fuga incidunt inventore itaque labore laboriosam minima molestiae
+                    necessitatibus nemo nisi officia optio quasi recusandae reiciendis sed, tenetur vel voluptas
+                    voluptatum? Consectetur consequuntur id laborum modi non officia quas voluptates.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center mb-5">
+                <a href="/make-reservation" class="btn btn-success">Book a Room</a>
+            </div>
+        </div>
+    </div>
+{{end}}
