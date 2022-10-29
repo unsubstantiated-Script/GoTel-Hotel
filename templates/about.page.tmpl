@@ -2,15 +2,9 @@
 {{define "content"}}
     <div class="container">
         <div class="row">
-            <div class="col"><h1>About Page</h1></div>
-            <p>{{index .StringMap "test"}}</p>
-            <p>
-                {{if ne (index .StringMap "remote_ip") ""}}
-                    Your remote IP address is {{index .StringMap "remote_ip"}}
-                {{else}}
-                    I don't know your ip address. Visit the <a href="/">Home Page</a>
-                {{end}}
-            </p>
+            <div class="col">
+                <h1 class="mt-3">This will be the about</h1>
+            </div>
         </div>
     </div>
 {{end}}
