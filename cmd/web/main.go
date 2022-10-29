@@ -1,5 +1,6 @@
 package main
 
+//Start app with 'go run cmd/web/*.go' in terminal
 import (
 	"GoTel/pkg/config"
 	"GoTel/pkg/handlers"
