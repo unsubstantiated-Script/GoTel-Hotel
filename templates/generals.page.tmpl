@@ -49,17 +49,51 @@
                     <div class="col">
                         <div class="form-row" id="reservation-dates-modal">
                             <div class="col">
-                                <input disabled required type="text" class="form-control" id="start-date" name="start" placeholder="Arrival">
+                                <input disabled required type="text" class="form-control" id="start_date" name="start" placeholder="Arrival">
                             </div>
                             <div class="col">
-                                <input disabled required type="text" class="form-control" id="end-date" name="end" placeholder="Departure">
+                                <input disabled required type="text" class="form-control" id="end_date" name="end" placeholder="Departure">
                             </div>
                         </div>
                 </div>
             </div>
             <form>
         `
-            attention.custom({text: html, title: "Choose Your Dates"});
+            attention.custom({
+                text: html,
+                title: "Choose Your Dates",
+                willOpen: () => {
+                    const elem = document.getElementById('reservation-dates-modal');
+                    const rp = new DateRangePicker(elem, {
+                        format: 'yyyy-mm-dd',
+                        showOnFocus: true,
+                    })
+                },
+                didOpen: () => {
+                    document.getElementById('start_date').removeAttribute('disabled')
+                    document.getElementById('end_date').removeAttribute('disabled')
+                },
+                callback: (result) => {
+
+                    //Grabbing data from the form
+                    let form = document.getElementById('check-availability-form')
+                    let formData = new FormData(form)
+
+                    //Another way of adding in a CSRFToken
+                    formData.append("csrf_token", {{.CSRFToken}})
+
+                    fetch('/search-availability-json', {
+                        method: "post",
+                        body: formData
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data)
+                            console.log(data.ok)
+                            console.log(data.message)
+                        })
+                }
+            });
         })
     </script>
 {{end}}

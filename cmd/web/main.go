@@ -2,9 +2,9 @@ package main
 
 //Start app with 'go run cmd/web/*.go' in terminal
 import (
-	"GoTel/pkg/config"
-	"GoTel/pkg/handlers"
-	"GoTel/pkg/render"
+	"GoTel/internal/config"
+	"GoTel/internal/handlers"
+	"GoTel/internal/render"
 	"fmt"
 	"github.com/alexedwards/scs/v2"
 	"log"
