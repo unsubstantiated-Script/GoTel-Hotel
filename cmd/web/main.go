@@ -37,19 +37,15 @@ func main() {
 	}
 
 	app.TemplateCache = tc
-	//Setting the template cache to be accessible
-	app.UseCache = true
+	//Setting the template cache to be accessible also toggles a "hot reload"
+	app.UseCache = false
 
 	repo := handlers.NewRepo(&app)
 	handlers.NewHandlers(repo)
 
 	render.NewTemplates(&app)
 
-	//http.HandleFunc("/", handlers.Repo.Home)
-	//http.HandleFunc("/about", handlers.Repo.About)
-
 	fmt.Println(fmt.Sprintf("starting application on port: %s", portNumber))
-	//_ = http.ListenAndServe(portNumber, nil)
 
 	srv := &http.Server{
 		Addr:    portNumber,
@@ -57,5 +53,7 @@ func main() {
 	}
 
 	err = srv.ListenAndServe()
-	log.Fatal(err)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
