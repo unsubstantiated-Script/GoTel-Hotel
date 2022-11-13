@@ -59,11 +59,6 @@
     <script>
         let attention = Prompt();
 
-        const elem = document.getElementById('dates');
-        // const rangePicker = new DateRangePicker(elem, {
-        //     format: "yyyy-mm-dd",
-        // })
-
 
         (function () {
             'use strict';
@@ -166,7 +161,7 @@
 
                 const {value: formValues} = await Swal.fire({
                     title,
-                    backdrop: false,
+                    backdrop: true,
                     html: text,
                     focusConfirm: false,
                     showCancelButton: true,
