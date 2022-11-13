@@ -4,7 +4,9 @@ import (
 	"GoTel/pkg/config"
 	"GoTel/pkg/models"
 	"GoTel/pkg/render"
+	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 )
 
@@ -76,6 +78,33 @@ func (m *Repository) PostAvailability(w http.ResponseWriter, r *http.Request) {
 
 	//Casting string message to bytes
 	w.Write([]byte(fmt.Sprintf("Start date is %s and end date is %s", start, end)))
+}
+
+//Setting up a JSON struct with specific types
+type jsonResponse struct {
+	OK      bool   `json:"ok"`
+	Message string `json:"message"`
+}
+
+// Renders AvailabilityJSON handles requests for Availability and sends JSON
+func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
+	resp := jsonResponse{
+		OK:      true,
+		Message: "Available!",
+	}
+
+	//Creating a json response and error handling
+	//assigning both out and err at the same time.
+	out, err := json.MarshalIndent(resp, "", "     ")
+	if err != nil {
+		log.Println(err)
+	}
+
+	log.Println(string(out))
+
+	//Header
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(out)
 }
 
 func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
