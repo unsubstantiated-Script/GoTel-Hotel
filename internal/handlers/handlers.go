@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"GoTel/pkg/config"
-	"GoTel/pkg/models"
-	"GoTel/pkg/render"
+	"GoTel/internal/config"
+	"GoTel/internal/models"
+	"GoTel/internal/render"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -99,8 +99,6 @@ func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err)
 	}
-
-	log.Println(string(out))
 
 	//Header
 	w.Header().Set("Content-Type", "application/json")

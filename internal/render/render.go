@@ -1,8 +1,8 @@
 package render
 
 import (
-	"GoTel/pkg/config"
-	"GoTel/pkg/models"
+	"GoTel/internal/config"
+	"GoTel/internal/models"
 	"bytes"
 	"github.com/justinas/nosurf"
 	"html/template"
