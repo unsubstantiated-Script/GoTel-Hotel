@@ -6,9 +6,9 @@ type TemplateData struct {
 	IntMap    map[string]int
 	FloatMap  map[string]float32
 	// For the unsure items you wanna pass to a template
-	Data     map[string]interface{}
-	CSRToken string
-	Flash    string
-	Warning  string
-	Error    string
+	Data      map[string]interface{}
+	Flash     string
+	Warning   string
+	Error     string
+	CSRFToken string
 }

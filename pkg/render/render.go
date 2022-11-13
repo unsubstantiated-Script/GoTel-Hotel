@@ -4,72 +4,12 @@ import (
 	"GoTel/pkg/config"
 	"GoTel/pkg/models"
 	"bytes"
+	"github.com/justinas/nosurf"
 	"html/template"
 	"log"
 	"net/http"
 	"path/filepath"
 )
-
-//// This renders our template
-//func RenderTemplateTest(w http.ResponseWriter, tmpl string) {
-//	parsedTemplate, _ := template.ParseFiles("./templates/"+tmpl, "./templates/base.layout.tmpl")
-//	err := parsedTemplate.Execute(w, nil)
-//	if err != nil {
-//		fmt.Println("error parsing template:", err)
-//	}
-//}
-
-//Template caching below
-
-//var templateCache = make(map[string]*template.Template)
-//
-//func RenderTemplate(w http.ResponseWriter, t string) {
-//	var tmpl *template.Template
-//	var err error
-//
-//	// check to see if we already have the template in the cache
-//	_, inMap := templateCache[t]
-//
-//	if !inMap {
-//		// Need to create the template
-//		log.Println("creating template and adding to cache")
-//		err = createTemplateCache(t)
-//		if err != nil {
-//			log.Println(err)
-//		}
-//	} else {
-//		log.Println("Using cached template")
-//	}
-//
-//	tmpl = templateCache[t]
-//
-//	err = tmpl.Execute(w, nil)
-//	if err != nil {
-//		log.Println(err)
-//	}
-//}
-//
-//func createTemplateCache(t string) error {
-//	templates := []string{
-//		fmt.Sprintf("./templates/%s", t),
-//		"./templates/base.layout.tmpl",
-//	}
-//
-//	//parse template
-//
-//	tmpl, err := template.ParseFiles(templates...)
-//
-//	// checking for errors
-//	if err != nil {
-//		return err
-//	}
-//
-//	//add template to cache
-//
-//	templateCache[t] = tmpl
-//
-//	return nil
-//}
 
 var app *config.AppConfig
 
@@ -78,11 +18,13 @@ func NewTemplates(a *config.AppConfig) {
 	app = a
 }
 
-func AddDefaultData(td *models.TemplateData) *models.TemplateData {
+// AddDefaultData adds data for all templates
+func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateData {
+	td.CSRFToken = nosurf.Token(r)
 	return td
 }
 
-func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
+func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, td *models.TemplateData) {
 	var templateCache map[string]*template.Template
 	//Using caching on development vs production to allow for hot reloads
 	if app.UseCache {
@@ -102,7 +44,7 @@ func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData)
 	// For finer grained error checking
 	buf := new(bytes.Buffer)
 
-	td = AddDefaultData(td)
+	td = AddDefaultData(td, r)
 
 	_ = t.Execute(buf, td)
 
