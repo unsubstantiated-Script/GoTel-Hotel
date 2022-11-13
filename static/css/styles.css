@@ -14,9 +14,13 @@
 
 
 body > div.swal2-container.swal2-center.swal2-backdrop-show > div {
-    min-height: 500px;
+    height: 400px;
 }
 
 #swal2-html-container {
-    min-height: 400px;
+    height: 300px;
+}
+
+.datepicker-dropdown {
+    z-index: 10000;
 }
