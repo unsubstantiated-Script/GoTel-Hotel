@@ -71,7 +71,40 @@ func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
 
 // PostReservation handles the posting of a reservation form
 func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
+	// Checking to see if there's any errors on the form
+	err := r.ParseForm()
 
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	reservation := models.Reservation{
+		FirstName: r.Form.Get("first_name"),
+		LastName:  r.Form.Get("last_name"),
+		Email:     r.Form.Get("email"),
+		Phone:     r.Form.Get("phone"),
+	}
+
+	form := forms.New(r.PostForm)
+
+	// Using the Has Method to check if the value exists
+	form.Has("first_name", r)
+
+	if !form.Valid() {
+		//Getting the wrong data from the form anyway so we don't lose it
+		data := make(map[string]interface{})
+		data["reservation"] = reservation
+
+		//A form of redirect back to to the form page with errors
+		render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{
+			//Giving access to the form object on the page with errors
+			Form: form,
+			Data: data,
+		})
+		// Wrap it up
+		return
+	}
 }
 
 // Renders Availability Page

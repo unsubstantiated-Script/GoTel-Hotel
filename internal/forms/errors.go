@@ -1,6 +1,6 @@
 package forms
 
-//Map of strings with a slice of strings
+//Map of strings with a slice of strings because there might be more than one error
 type errors map[string][]string
 
 // Adds an error message for a given field
