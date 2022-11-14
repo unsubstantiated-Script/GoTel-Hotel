@@ -63,9 +63,14 @@ func (m *Repository) Majors(w http.ResponseWriter, r *http.Request) {
 }
 
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
+	var emptyReservation models.Reservation
+	data := make(map[string]interface{})
+	data["reservation"] = emptyReservation
+
 	render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{
 		//Giving access to the form object on the page
 		Form: forms.New(nil),
+		Data: data,
 	})
 }
 
@@ -88,8 +93,10 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 
 	form := forms.New(r.PostForm)
 
-	// Using the Has Method to check if the value exists
-	form.Has("first_name", r)
+	//// Using the Has Method to check if the value exists
+	//form.Has("first_name", r)
+
+	form.Required("first_name", "last_name", "email", "phone")
 
 	if !form.Valid() {
 		//Getting the wrong data from the form anyway so we don't lose it
