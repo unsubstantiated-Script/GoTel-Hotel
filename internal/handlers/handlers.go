@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"GoTel/internal/config"
+	"GoTel/internal/forms"
 	"GoTel/internal/models"
 	"GoTel/internal/render"
 	"encoding/json"
@@ -62,7 +63,15 @@ func (m *Repository) Majors(w http.ResponseWriter, r *http.Request) {
 }
 
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{})
+	render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{
+		//Giving access to the form object on the page
+		Form: forms.New(nil),
+	})
+}
+
+// PostReservation handles the posting of a reservation form
+func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
+
 }
 
 // Renders Availability Page

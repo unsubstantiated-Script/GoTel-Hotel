@@ -1,5 +1,7 @@
 package models
 
+import "GoTel/internal/forms"
+
 type TemplateData struct {
 	// Data to pass to a template
 	StringMap map[string]string
@@ -11,4 +13,5 @@ type TemplateData struct {
 	Warning   string
 	Error     string
 	CSRFToken string
+	Form      *forms.Form
 }
