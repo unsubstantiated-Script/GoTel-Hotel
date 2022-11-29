@@ -96,7 +96,17 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 	//// Using the Has Method to check if the value exists
 	//form.Has("first_name", r)
 
+	//Checks for required fields
 	form.Required("first_name", "last_name", "email", "phone")
+
+	//Checking minimum length
+	form.MinLength("first_name", 3, r)
+
+	//Checking minimum length
+	form.MinLength("last_name", 3, r)
+
+	//Checking email
+	form.IsEmail("email")
 
 	if !form.Valid() {
 		//Getting the wrong data from the form anyway so we don't lose it
