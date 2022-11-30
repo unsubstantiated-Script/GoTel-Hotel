@@ -4,7 +4,9 @@ package main
 import (
 	"GoTel/internal/config"
 	"GoTel/internal/handlers"
+	"GoTel/internal/models"
 	"GoTel/internal/render"
+	"encoding/gob"
 	"fmt"
 	"github.com/alexedwards/scs/v2"
 	"log"
@@ -17,13 +19,16 @@ const portNumber = ":8080"
 var app config.AppConfig
 var session *scs.SessionManager
 
+// main is the main function
 func main() {
+	// what am I going to put in the session
+	gob.Register(models.Reservation{})
 
-	// Change to true when in production...
+	// change this to true when in production
 	app.InProduction = false
 
+	// set up the session
 	session = scs.New()
-
 	session.Lifetime = 24 * time.Hour
 	session.Cookie.Persist = true
 	session.Cookie.SameSite = http.SameSiteLaxMode
@@ -37,7 +42,6 @@ func main() {
 	}
 
 	app.TemplateCache = tc
-	//Setting the template cache to be accessible also toggles a "hot reload"
 	app.UseCache = false
 
 	repo := handlers.NewRepo(&app)
@@ -45,7 +49,7 @@ func main() {
 
 	render.NewTemplates(&app)
 
-	fmt.Println(fmt.Sprintf("starting application on port: %s", portNumber))
+	fmt.Println(fmt.Sprintf("Staring application on port %s", portNumber))
 
 	srv := &http.Server{
 		Addr:    portNumber,
